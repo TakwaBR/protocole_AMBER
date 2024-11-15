@@ -1,0 +1,13 @@
+energy minimization
+ 
+ &cntrl
+ 
+ imin=1, # Lancer une minimisation
+ maxcyc=5000, # Nombre total de pas de minimisation
+ ncyc=2500, # Nombre de pas de steepest descent
+ ntpr=100, # Ecriture de la progression de la minimisation dans le fichier out
+ ntb=0, 
+ cut = 9999.0, # Cut-off pour les termes non-liés
+ igb = 1,
+ /
+
