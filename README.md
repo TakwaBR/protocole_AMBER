@@ -117,4 +117,39 @@ Arguments :
 
 Vous pouvez trouver un exemple de fichier de sortie sous ce lien : [results/contraintes_jcoupling.rst](https://github.com/TakwaBR/protocole_AMBER/blob/main/results/contraintes_jcoupling.rst)
 
-### Contraintes d’angles Phi/Psi/Chi 1 : utilisez les commandes `makeANG_RST` et le logiciel `TALOS-N`
+### Contraintes d’angles Phi/Psi/Chi 1 : utilisez la commande `makeANG_RST` et le logiciel `TALOS-N`
+
+Vous pouvez trouver un exemple de fichier structuré pour `TALOS-N` sous ce lien: [data/talosn_input.txt](https://github.com/TakwaBR/protocole_AMBER/blob/main/data/talosn_input.txt)
+
+Après l'exécution de `TALOS-N`, il est nécessaire de reformater le fichier de sortie afin de le préparer pour l'entrée dans `makeANG_RST`. Vous pouvez utiliser le script [src/talosn_reformat.py](https://github.com/TakwaBR/protocole_AMBER/blob/main/src/talosn_reformat.py) pour effectuer cette conversion.
+
+```bash
+python3 talosn_reformat.py pred.tab contraintes_phipsi.dist
+```
+Vous pouvez trouver un exemple de fichier de sortie sous ce lien: [data/contraintes_phipsi.dist](https://github.com/TakwaBR/protocole_AMBER/blob/main/data/contraintes_phipsi.dist)
+
+Il est essentiel de supprimer les angles pour lesquels `TALOS-N` n'a pas effectué de prédiction (c'est-à-dire ceux ayant une valeur de 9999.000). Si vous disposez des informations sur les angles CHI, vous pouvez également les ajouter.
+
+Vous pouvez désormais générer le fichier de contraintes en utilisant `makeANG_RST`
+```bash
+/usr/local/amber22/bin/makeANG_RST -pdb mol.pdb -con contraintes_phipsi.dist -lib tordef.lib > contraintes_angles.rst
+```
+Arguments :
+
+- `-pdb` : fichier PDB de votre molécule
+- `-con` : fichier d'entrée correctement formaté
+- `-lib` : fichier de la librairie de makeANG_RST. Vous pouvez le copier dans votre répertoire et le modifier si nécessaire.
+- contraintes_angles.rst est le fichier de sortie
+
+### Contraintes de chiralité et de conformation cis/trans: utilisez la commande `makeCHIR_RST`
+Le fichier de contraintes de chiralité et de conformation peut être généré à partir du fichier PDB de la molécule seulement.
+
+```bash
+/usr/local/amber22/bin/makeCHIR_RST mol.pdb angles_impropres.rst
+```
+### Génération du fichier contenant l'ensemble des contraintes RMN
+Une fois tous les fichiers de contraintes générés, il est nécessaire de les concaténer en un seul fichier.
+```bash
+cat contraintes_noe.rst contraintes_jcoupling.rst contraintes_angles.rst angles_impropres.rst > contraintes_rmn.rst
+```
+Vous pouvez trouver un exemple de fichier de sortie sous ce lien: 
