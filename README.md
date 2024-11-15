@@ -14,18 +14,18 @@ La molécule peut être construite à partir de sa séquence ou importée depuis
 ```bash
 > mol = sequence { ACE VAL PRO PRO PRO VAL PRO PRO ARG ARG ARG NHE }
 ```
-ou
+
 ```bash
 > mol = loadpdb fichier_mol.pdb
 ```
 - Sélectionnez le modèle d’eau à utiliser. Le modèle OPC est recommandé pour une compatibilité optimale avec le champ de force ff19SB.
-```bash
-> source leaprc.water.opc # Import de la bibliothèque du modèle d'eau
-```
+  ```bash
+  > source leaprc.water.opc # Import de la bibliothèque du modèle d'eau
+  ```
 - Ajoutez des molécules d'eau au système en définissant les dimensions et la forme de la boîte de simulation.
-```bash
-> solvateoct mol OPCBOX 10.0
-```
+  ```bash
+  > solvateoct mol OPCBOX 10.0
+  ```
 - Les ions peuvent maintenant être ajoutés au système.
   ```bash
   > charge mol # Permet de déterminer la charge totale de la molécule
@@ -40,7 +40,7 @@ ou
 ```bash
 > saveamberparm mol mol.parm mol.rst7
 ```
-** Pour effectuer un recuit simulé de la molécule seule dans le vide, ces étapes suffisent: **
+**Pour effectuer un recuit simulé de la molécule seule dans le vide, ces étapes suffisent:**
 ```bash
 tleap
 > source leaprc.protein.ff19SB
@@ -48,3 +48,26 @@ tleap
 > saveamberparm mol mol.parm mol.rst7
 ```
 
+## Génération des fichiers de contraintes
+
+Pour générer les fichiers de contraintes, plusieurs outils sont disponibles. Cependant, ces outils requièrent un format spécifique de fichier, il est donc nécessaire de formater correctement vos fichiers d'entrée.
+
+### Contraintes de distances (NOE) : utilisez la commande `makeDIST_RST`
+Format du fichier d'entrée :
+Le fichier doit être structuré avec les colonnes suivantes :
+
+- `Res1_id` : ID du premier résidu
+- `Res1_nom` : Nom du premier résidu
+- `Atome1_nom` : Nom de l'atome dans le premier résidu
+- `Res2_id` : ID du second résidu
+- `Res2_nom` : Nom du second résidu
+- `Atome2_nom` : Nom de l'atome dans le second résidu
+- `Distance_inf` : Limite inférieure de la distance
+- `Distance_sup` : Limite supérieure de la distance
+
+Vous pouvez trouver un exemple de fichier structuré sous ce lien :
+
+```text
+1  VAL  HB  2  PRO  HD3  1.8  3
+2  PRO  HD2  1  VAL  HA  1.8  2.3
+```
