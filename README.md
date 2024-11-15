@@ -65,7 +65,7 @@ Le fichier doit être structuré avec les colonnes suivantes :
 - `Distance_inf` : Limite inférieure de la distance
 - `Distance_sup` : Limite supérieure de la distance
 
-Vous pouvez trouver un exemple de fichier structuré sous ce lien :
+Vous pouvez trouver un exemple de fichier structuré sous ce lien : [data/contraintes_noe.dist](https://github.com/TakwaBR/protocole_AMBER/blob/main/data/contraintes_noe.dist)
 
 ```text
 1  VAL  HB  2  PRO  HD3  1.8  3
