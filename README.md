@@ -156,3 +156,46 @@ Vous pouvez trouver un exemple de fichier de sortie sous ce lien: [results/contr
 
 ## Recuit simulé
 **Assurez-vous de vous placer dans le dossier iseran:/data/votre-nom avant de lancer les simulations!**
+
+### Minimisation de la structure
+Avant de lancer le recuit simulé, il est nécessaire d'effectuer une minimisation de la structure.
+
+Un exemple de fichier de minimisation est disponible via le lien suivant: [src/minimisation_vide.in](https://github.com/TakwaBR/protocole_AMBER/blob/main/src/minimisation_vide.in)
+
+```bash
+/usr/local/amber22/bin/pmemd.cuda -O -i minimisation_vide.in -o minimisation_vide.out -p mol.parm7 -c mol.rst7 -r minimisation_vide.ncrst -x minimisation_vide.nc -inf minimisation_vide.info &
+```
+
+Arguments :
+
+- `-O` : écrase les fichiers de sortie déjà existants
+- `-i` : fichier d'entrée pour la minimisation
+- `-o` : fichier de sortie contenant les informations sur les énergies pendant la minimisation
+- `-p` : fichier de topologie
+- `-c` : fichier de coordonnées
+- `-r` : fichier de sortie pour les coordonnées "restart"
+- `-x` : fichier de sortie pour les trajectoires
+- `-inf` : fichier d'informations supplémentaires
+
+### Création de dossiers pour les fichiers de sortie
+Il est recommandé de créer des dossiers dédiés pour organiser les fichiers de sortie du recuit simulé.
+```bash
+mkdir OUT
+mkdir NC
+mkdir NCRST
+mkdir INFO
+```
+### Lancement du recuit simulé
+Un exemple de fichier de recuit simulé est disponible via le lien suivant: [src/recuit_simule.in](https://github.com/TakwaBR/protocole_AMBER/blob/main/src/recuit_simule.in)
+
+Un script bash permettant de lancer 100 simulations par lots de 2 est disponible via le lien suivant: [src/recuit_simule.sh](https://github.com/TakwaBR/protocole_AMBER/blob/main/src/recuit_simule.sh)
+
+```bash
+chmod +x recuit_simule.sh
+```
+Cette commande rend le script `recuit_simule.sh` exécutable, permettant son lancement direct en tant que programme.
+
+Vous pouvez à présent lancer le recuit simulé
+```bash
+./recuit_simule.sh
+```
