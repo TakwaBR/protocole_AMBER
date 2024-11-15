@@ -1,0 +1,43 @@
+simulated annealing
+&cntrl
+  imin = 0, # Pas de minimisation
+  ntc=1, # Pas de SHAKE
+  ntpr=200, # Ecriture de la progression de la minimisation tous les 200 pas
+  ntwx=400, # Ecriture des coordonnées
+  ntb = 0, # Pas de périodicité, pas de PME
+  cut = 9999.0, # Cut-off
+  igb = 1, # GB/SA 
+  nstlim = 3000000, # Nombre de pas de la simulation 
+  dt = 0.0005, # Timstep
+  ntt = 3, gamma_ln=5.0,
+  temp0=300, nmropt=1,
+  pencut=0.001,
+  ig=-1, vlimit=20,
+/
+ 
+&wt type='TEMP0', istep1=0,istep2=200000,
+   value1=300.0, value2=600.0,/
+&wt type='TEMP0', istep1=200001,istep2=400000,
+   value1=600.0, value2=600.0,/
+&wt type='TEMP0', istep1=400001,istep2=600000,
+   value1=600.0, value2=1200.0,/
+&wt type='TEMP0', istep1=600001,istep2=800000,
+   value1=1200.0, value2=1200.0,/
+&wt type='TEMP0', istep1=800001,istep2=1050000,
+   value1=1200.0, value2=3500.0,/
+&wt type='TEMP0', istep1=1050001,istep2=1150000,
+   value1=3500.0, value2=3500.0,/
+&wt type='TEMP0', istep1=1150001,istep2=1400000,
+   value1=3500.0, value2=900.0,/
+&wt type='TEMP0', istep1=1400001,istep2=3000000,
+   value1=900.0, value2=0.0,/
+&wt type='REST', istep1=0,istep2=1200000,
+   value1=0.0, value2=0.0,/
+&wt type='REST', istep1=1200001,istep2=2000000,
+   value1=0.0, value2=1.0,/
+&wt type='REST', istep1=2000001,istep2=3000000,
+   value1=1.0, value2=1.0,/
+&wt type='END'/
+ 
+LISTOUT=POUT
+DISANG=contraintes_rmn.rst
