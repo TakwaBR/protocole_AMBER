@@ -152,4 +152,7 @@ Une fois tous les fichiers de contraintes générés, il est nécessaire de les 
 ```bash
 cat contraintes_noe.rst contraintes_jcoupling.rst contraintes_angles.rst angles_impropres.rst > contraintes_rmn.rst
 ```
-Vous pouvez trouver un exemple de fichier de sortie sous ce lien: 
+Vous pouvez trouver un exemple de fichier de sortie sous ce lien: [results/contraintes_rmn.rst](https://github.com/TakwaBR/protocole_AMBER/blob/main/results/contraintes_rmn.rst)
+
+## Recuit simulé
+**Assurez-vous de vous placer dans le dossier iseran:/data/votre-nom avant de lancer les simulations!**
