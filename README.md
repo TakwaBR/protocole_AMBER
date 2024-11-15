@@ -37,9 +37,9 @@ La molécule peut être construite à partir de sa séquence ou importée depuis
   > addIons2 mol Na+ 8 Cl- 8
   ```
 - Enregistrez ensuite les fichiers de topologie et de coordonnées du système :
-```bash
-> saveamberparm mol mol.parm mol.rst7
-```
+  ```bash
+  > saveamberparm mol mol.parm mol.rst7
+  ```
 **Pour effectuer un recuit simulé de la molécule seule dans le vide, ces étapes suffisent:**
 ```bash
 tleap
@@ -70,4 +70,19 @@ Vous pouvez trouver un exemple de fichier structuré sous ce lien : [data/contra
 ```text
 1  VAL  HB  2  PRO  HD3  1.8  3
 2  PRO  HD2  1  VAL  HA  1.8  2.3
+```
+
+Vous pouvez exécuter cette commande depuis la machine iseran :
+```bash
+/usr/local/amber22/bin/makeDIST_RST -ual contraintes_noe.dist -pdb mol.pdb -rst contraintes_noe.rst -map /usr/local/amber22/dat/map.DG-AMBER
+```
+Arguments :
+-`ual` : fichier d'entrée bien formaté
+-`pdb` : fichier PDB de votre molécule
+-`rst` : fichier de sortie
+-`map` : fichier nécessaire au fonctionnement de `makeDIST_RST`
+Génération du fichier PDB :
+Vous pouvez générer le fichier PDB à partir des fichiers de topologie et de coordonnées en utilisant cette commande:
+```bash
+$AMBERHOME/bin/ambpdb -p mol.parm7 -c mol.rst7 > mol.pdb
 ```
