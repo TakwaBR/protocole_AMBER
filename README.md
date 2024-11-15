@@ -68,8 +68,8 @@ Le fichier doit être structuré avec les colonnes suivantes :
 Vous pouvez trouver un exemple de fichier structuré sous ce lien : [data/contraintes_noe.dist](https://github.com/TakwaBR/protocole_AMBER/blob/main/data/contraintes_noe.dist)
 
 ```text
-1  VAL  HB  2  PRO  HD3  1.8  3
-2  PRO  HD2  1  VAL  HA  1.8  2.3
+2  VAL  HB  3  PRO  HD3  1.8  3
+3  PRO  HD2  2  VAL  HA  1.8  2.3
 ```
 
 Vous pouvez exécuter cette commande depuis la machine iseran :
@@ -77,12 +77,31 @@ Vous pouvez exécuter cette commande depuis la machine iseran :
 /usr/local/amber22/bin/makeDIST_RST -ual contraintes_noe.dist -pdb mol.pdb -rst contraintes_noe.rst -map /usr/local/amber22/dat/map.DG-AMBER
 ```
 Arguments :
--`ual` : fichier d'entrée bien formaté
--`pdb` : fichier PDB de votre molécule
--`rst` : fichier de sortie
--`map` : fichier nécessaire au fonctionnement de `makeDIST_RST`
+- `ual` : fichier d'entrée bien formaté
+- `pdb` : fichier PDB de votre molécule
+- `rst` : fichier de sortie
+- `map` : fichier nécessaire au fonctionnement de `makeDIST_RST`
+
 Génération du fichier PDB :
 Vous pouvez générer le fichier PDB à partir des fichiers de topologie et de coordonnées en utilisant cette commande:
 ```bash
 $AMBERHOME/bin/ambpdb -p mol.parm7 -c mol.rst7 > mol.pdb
+```
+Vous pouvez trouver un exemple de fichier de sortie sous ce lien : 
+
+### Contraintes d’angles (<sup>3<sup/>J-coupling) : utilisez la commande `makeANG_RST`
+Format du fichier d’entrée :
+Le fichier doit être structuré avec les colonnes suivantes :
+
+- `Res_id` : ID du résidu
+- `Res_nom` : Nom du résidu
+- `J-couple` : Atomes couplés (indiquez les atomes concernés par le couplage J)
+- `ConstanteJ_inf` : Limite inférieure de la constante J
+- `ConstanteJ_sup` : Limite supérieure de la constante J
+
+Vous pouvez trouver un exemple de fichier structuré sous ce lien :
+
+```text
+6  VAL  JHNA  6.5  8.5
+9  ARG  JHNA  5.1  7.1
 ```
