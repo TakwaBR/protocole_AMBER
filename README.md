@@ -77,19 +77,19 @@ Vous pouvez exécuter cette commande depuis la machine iseran :
 /usr/local/amber22/bin/makeDIST_RST -ual contraintes_noe.dist -pdb mol.pdb -rst contraintes_noe.rst -map /usr/local/amber22/dat/map.DG-AMBER
 ```
 Arguments :
-- `ual` : fichier d'entrée bien formaté
-- `pdb` : fichier PDB de votre molécule
-- `rst` : fichier de sortie
-- `map` : fichier nécessaire au fonctionnement de `makeDIST_RST`
+- `-ual` : fichier d'entrée bien formaté
+- `-pdb` : fichier PDB de votre molécule
+- `-rst` : fichier de sortie
+- `-map` : fichier nécessaire au fonctionnement de `makeDIST_RST`
 
 Génération du fichier PDB :
 Vous pouvez générer le fichier PDB à partir des fichiers de topologie et de coordonnées en utilisant cette commande:
 ```bash
 $AMBERHOME/bin/ambpdb -p mol.parm7 -c mol.rst7 > mol.pdb
 ```
-Vous pouvez trouver un exemple de fichier de sortie sous ce lien : 
+Vous pouvez trouver un exemple de fichier de sortie sous ce lien : [results/contraintes_noe.rst](https://github.com/TakwaBR/protocole_AMBER/blob/main/results/contraintes_noe.rst)
 
-### Contraintes d’angles (<sup>3<sup/>J-coupling) : utilisez la commande `makeANG_RST`
+### Contraintes d’angles (<sup>3</sup>J-coupling) : utilisez la commande `makeANG_RST`
 Format du fichier d’entrée :
 Le fichier doit être structuré avec les colonnes suivantes :
 
@@ -99,9 +99,22 @@ Le fichier doit être structuré avec les colonnes suivantes :
 - `ConstanteJ_inf` : Limite inférieure de la constante J
 - `ConstanteJ_sup` : Limite supérieure de la constante J
 
-Vous pouvez trouver un exemple de fichier structuré sous ce lien :
+Vous pouvez trouver un exemple de fichier structuré sous ce lien : [data/contraintes_jcoupling.dist](https://github.com/TakwaBR/protocole_AMBER/blob/main/data/contraintes_jcoupling.dist)
 
 ```text
 6  VAL  JHNA  6.5  8.5
 9  ARG  JHNA  5.1  7.1
 ```
+```bash
+/usr/local/amber22/bin/makeANG_RST -pdb mol.pdb -con contraintes_jcoupling.dist -lib /usr/local/amber22/dat/tordef.lib > contraintes_jcoupling.rst
+```
+
+Arguments :
+- `-pdb` : fichier PDB de votre molécule
+- `-con` : fichier d’entrée bien formaté contenant les informations sur les atomes couplés
+- `-lib` : fichier de la librairie de `makeANG_RST`. Vous pouvez le copier dans votre répertoire et le modifier si nécessaire.
+- `contraintes_jcoupling.rst` : fichier de sortie contenant les contraintes générées
+
+Vous pouvez trouver un exemple de fichier de sortie sous ce lien : [results/contraintes_jcoupling.rst](https://github.com/TakwaBR/protocole_AMBER/blob/main/results/contraintes_jcoupling.rst)
+
+### Contraintes d’angles Phi/Psi/Chi 1 : utilisez les commandes `makeANG_RST` et le logiciel `TALOS-N`
