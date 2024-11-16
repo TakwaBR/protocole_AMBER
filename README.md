@@ -155,7 +155,7 @@ cat contraintes_noe.rst contraintes_jcoupling.rst contraintes_angles.rst angles_
 Vous pouvez trouver un exemple de fichier de sortie sous ce lien: [results/contraintes_rmn.rst](https://github.com/TakwaBR/protocole_AMBER/blob/main/results/contraintes_rmn.rst)
 
 ## Recuit simulé
-**Assurez-vous de vous placer dans le dossier iseran:/data/votre-nom avant de lancer les simulations!**
+**Assurez-vous de vous placer dans le dossier iseran:/data/votre-nom avant de lancer les simulations !**
 
 ### Minimisation de la structure
 Avant de lancer le recuit simulé, il est nécessaire d'effectuer une minimisation de la structure.
@@ -198,4 +198,17 @@ Cette commande rend le script `recuit_simule.sh` exécutable, permettant son lan
 Vous pouvez à présent lancer le recuit simulé
 ```bash
 ./recuit_simule.sh
+```
+### Choix des meilleures structures
+Pour sélectionner les meilleures structures RMN produites, vous pouvez utiliser le script bash [src/extract_all_energy.sh](https://github.com/TakwaBR/protocole_AMBER/blob/main/src/extract_all_energy.sh) qui utilise le script Python [src/extract_mesure.py](https://github.com/TakwaBR/protocole_AMBER/blob/main/src/extract_mesure.py) pour extraire toutes les énergies totales des simulations et créer des fichiers `.dat` dans un nouveau dossier nommé `energies_files`.
+
+```bash
+chmod +x extract_all_energy.sh
+./extract_all_energy.sh
+```
+Utilisez le script bash [src/extract_last_energy.sh](https://github.com/TakwaBR/protocole_AMBER/blob/main/src/extract_last_energy.sh)  pour extraire les énergies finales de chaque simulation et les trier par ordre croissant. Le classement sera écrit dans un fichier de sortie nommé `energies_last_values_sorted.txt`
+
+```bash
+chmod +x extract_last_energy.sh
+./extract_last_energy.sh
 ```
